@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Mode Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <button id="increaseTextSize">Text size +</button>
+            <button id="decreaseTextSize">Text size -</button>
+            <button id="toggleAudio">Audio text</button>
+            <button id="toggleFocusMode">Focus mode <span id="focusStatus">Off</span></button>
+        </div>
+
+        <div class="content">
+            <div class="image">
+                <img src="path/to/image.png" alt="Trevor usando um tablet">
+            </div>
+            <div class="text-section">
+                <h2>High school student with autism</h2>
+                <div id="progressContainer" class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <div id="textContent" class="text-content"></div>
+                <div class="navigation">
+                    <button id="prevLine" class="nav-arrow">⬆️</button>
+                    <button id="nextLine" class="nav-arrow">⬇️</button>
+                </div>
+            </div>            
+            
+        </div>
+    </div>
+    <script src="interaction.js"></script>
+</body>
+</html>

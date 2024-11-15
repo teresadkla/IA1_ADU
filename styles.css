@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+}
+
+.image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.text-section {
+    flex: 1;
+}
+
+.text-content {
+    background-color: #657b7b;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 150px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.nav-arrow {
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+#focusStatus {
+    font-weight: bold;
+}
+
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: none; /* Inicialmente escondida */
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4caf50; /* Cor da barra de progresso */
+    border-radius: 5px;
+}
+
+#nextLine,
+#prevLine {
+    display: none;
+}
