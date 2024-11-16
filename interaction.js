@@ -1,10 +1,13 @@
-// Elementos do DOM
+
 const textContentEl = document.getElementById("textContent");
 const focusStatusEl = document.getElementById("focusStatus");
 const progressBarEl = document.getElementById("progressBar");
 const progressContainerEl = document.getElementById("progressContainer");
 const nextLineButton = document.getElementById("nextLine");
 const prevLineButton = document.getElementById("prevLine");
+const increaseTextSizeBtn = document.getElementById("increaseTextSize");
+const decreaseTextSizeBtn = document.getElementById("decreaseTextSize");
+
 
 // Conteúdo do texto dividido em linhas
 const textLines = [
@@ -18,13 +21,16 @@ const textLines = [
 // Variáveis de controle
 let focusMode = false;
 let currentLine = 0;
+let textSize = 18;
 
 // Atualiza o texto com base no modo de foco
 function updateText() {
     if (focusMode) {
+        // Mostra apenas a linha atual no modo de foco
         textContentEl.innerText = textLines[currentLine];
-        updateProgressBar();
+        updateProgressBar(); // Atualiza a barra de progresso
     } else {
+        // Mostra todo o texto quando o modo de foco está desligado
         textContentEl.innerText = textLines.join(" ");
     }
 }
@@ -39,8 +45,9 @@ function updateProgressBar() {
 function toggleFocusMode() {
     focusMode = !focusMode;
     focusStatusEl.innerText = focusMode ? "On" : "Off";
-    currentLine = 0;
-    
+    currentLine = 0; // Reinicia a linha atual
+
+    // Mostra ou esconde a barra de progresso e os botões com base no modo de foco
     if (focusMode) {
         progressContainerEl.style.display = "block"; // Mostra a barra de progresso
         nextLineButton.style.display = "inline-block"; // Mostra o botão "Próxima"
@@ -51,8 +58,8 @@ function toggleFocusMode() {
         prevLineButton.style.display = "none"; // Esconde o botão "Anterior"
         progressBarEl.style.width = "0"; // Reseta a barra de progresso
     }
-    
-    updateText();
+
+    updateText(); // Atualiza o texto com base no modo
 }
 
 // Mostra a próxima linha no modo de foco
@@ -70,11 +77,23 @@ function showPrevLine() {
         updateText();
     }
 }
+function increaseTextSize() {
+    textSize += 2;
+    textContentEl.style.fontSize = textSize + "px";
+}
 
+function decreaseTextSize() {
+    if (textSize > 10) {
+        textSize -= 2;
+        textContentEl.style.fontSize = textSize + "px";
+    }
+}
 // Adiciona event listeners aos botões de navegação
 nextLineButton.addEventListener("click", showNextLine);
 prevLineButton.addEventListener("click", showPrevLine);
 document.getElementById("toggleFocusMode").addEventListener("click", toggleFocusMode);
+increaseTextSizeBtn.addEventListener("click", increaseTextSize);
+decreaseTextSizeBtn.addEventListener("click", decreaseTextSize);
 
 // Inicializa o texto
 updateText();
