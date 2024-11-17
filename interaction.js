@@ -22,13 +22,11 @@ let speechSynthesisInstance = window.speechSynthesis;
 // Função para atualizar o estado do texto
 function updateText() {
     if (focusMode) {
-        // Exibe apenas o elemento atual no modo de foco
         textElements.forEach((el, index) => {
             el.style.display = index === currentElementIndex ? "block" : "none";
         });
         updateProgressBar();
     } else {
-        // Exibe todos os elementos no modo normal
         textElements.forEach((el) => {
             el.style.display = "block";
         });
@@ -98,7 +96,7 @@ function toggleAudio() {
     if (audioEnabled) {
         toggleAudioBtn.querySelector("img").src = "images/sound_on.svg";
         toggleAudioBtn.querySelector("img").alt = "Audio on";
-        readText();
+        readText(); // Lê o texto completo no modo atual
     } else {
         toggleAudioBtn.querySelector("img").src = "images/sound_off.svg";
         toggleAudioBtn.querySelector("img").alt = "Audio off";
@@ -112,24 +110,56 @@ function readText() {
 
     if (focusMode) {
         // No modo Focus, lê apenas o elemento atual
-        const textToRead = textElements[currentElementIndex].innerText;
-        speakText(textToRead);
+        const textToRead = textElements[currentElementIndex];
+        highlightAndSpeak(textToRead);
     } else {
         // No modo Focus Off, lê todos os elementos visíveis em ordem
-        const visibleText = textElements.map((el) => el.innerText).join(" "); // Junta todos os textos visíveis
-        speakText(visibleText);
+        textElements.forEach((el) => highlightAndSpeak(el));
     }
 }
 
-// Função para sintetizar e ler texto
-function speakText(text) {
+// Função para destacar palavras e sintetizar o texto
+function highlightAndSpeak(element) {
+    const text = element.innerText;
+    const words = text.split(" ");
+    element.innerHTML = ""; // Limpa o conteúdo para recriar o texto com spans
+
+    // Envolvendo cada palavra em um span
+    words.forEach((word, index) => {
+        const span = document.createElement("span");
+        span.innerText = word + " "; // Adiciona espaço após cada palavra
+        element.appendChild(span);
+    });
+
+    // Obtendo todas as palavras como spans
+    const wordSpans = Array.from(element.querySelectorAll("span"));
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-US"; // Define o idioma da fala
     utterance.rate = 1; // Velocidade da fala
 
+    let currentWordIndex = 0;
+
+    // Evento para destacar a palavra atual
+    utterance.onboundary = (event) => {
+        if (event.name === "word") {
+            if (currentWordIndex > 0) {
+                wordSpans[currentWordIndex - 1].classList.remove("highlight"); // Remove destaque anterior
+            }
+            if (currentWordIndex < wordSpans.length) {
+                wordSpans[currentWordIndex].classList.add("highlight"); // Adiciona destaque
+                currentWordIndex++;
+            }
+        }
+    };
+
+    // Remove o destaque ao final
+    utterance.onend = () => {
+        wordSpans.forEach((span) => span.classList.remove("highlight"));
+    };
+
     speechSynthesisInstance.speak(utterance);
 }
-
 
 // Função para parar a leitura
 function stopReading() {
