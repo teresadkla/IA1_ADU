@@ -115,3 +115,26 @@ body {
     border-radius: 100%;
     cursor: pointer;
 }
+
+.highlight {
+    background-color: yellow;
+    color: black;
+
+}
+/* 
+.audio-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#audioProgress {
+    width: 200px;
+}
+
+#audioCurrentTime, #audioDuration {
+    font-size: 14px;
+} */
+
+

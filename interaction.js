@@ -1,3 +1,4 @@
+// Variáveis principais
 const textContentEl = document.getElementById("textContent");
 const focusStatusEl = document.getElementById("focusStatus");
 const progressBarEl = document.getElementById("progressBar");
@@ -20,16 +21,14 @@ const textLines = [
 let focusMode = false;
 let currentLine = 0;
 let textSize = 18;
-let audioEnabled = false;
-let speechSynthesisInstance = window.speechSynthesis;
 
 // Função para atualizar o texto
 function updateText() {
     if (focusMode) {
-        textContentEl.innerText = textLines[currentLine];
+        textContentEl.innerHTML = textLines[currentLine];
         updateProgressBar();
     } else {
-        textContentEl.innerText = textLines.join(" ");
+        textContentEl.innerHTML = textLines.join(" ");
     }
 }
 
@@ -64,7 +63,7 @@ function showNextLine() {
     if (focusMode && currentLine < textLines.length - 1) {
         currentLine++;
         updateText();
-        if (audioEnabled) readText(); // Lê automaticamente a próxima linha se o áudio estiver ativado
+        if (typeof readText === "function") readText(); // Chama o TTS, se ativo
     }
 }
 
@@ -72,7 +71,7 @@ function showPrevLine() {
     if (focusMode && currentLine > 0) {
         currentLine--;
         updateText();
-        if (audioEnabled) readText(); // Lê automaticamente a linha anterior se o áudio estiver ativado
+        if (typeof readText === "function") readText(); // Chama o TTS, se ativo
     }
 }
 
@@ -89,46 +88,8 @@ function decreaseTextSize() {
     }
 }
 
-// Função para alternar o áudio
-function toggleAudio() {
-    audioEnabled = !audioEnabled;
-
-    if (audioEnabled) {
-        toggleAudioBtn.querySelector("img").src = "images/sound_on.svg";
-        toggleAudioBtn.querySelector("img").alt = "Audio on";
-        readText();
-    } else {
-        toggleAudioBtn.querySelector("img").src = "images/sound_off.svg";
-        toggleAudioBtn.querySelector("img").alt = "Audio off";
-        stopReading();
-    }
-}
-
-// Função para ler o texto
-function readText() {
-    speechSynthesisInstance.cancel(); // Cancela qualquer leitura em andamento
-
-    const textToRead = focusMode
-        ? textLines[currentLine] // Apenas a linha atual no modo de foco
-        : textLines.join(" "); // Todo o texto fora do modo de foco
-
-    const utterance = new SpeechSynthesisUtterance(textToRead);
-    utterance.lang = "en-US"; // Define o idioma da fala
-    utterance.rate = 1; // Velocidade da fala
-    speechSynthesisInstance.speak(utterance);
-
-    // Parar o áudio automaticamente ao terminar a leitura
-    utterance.onend = () => {
-        audioEnabled = false;
-        toggleAudioBtn.querySelector("img").src = "images/sound_off.svg";
-        toggleAudioBtn.querySelector("img").alt = "Audio off";
-    };
-}
-
-// Função para parar a leitura
-function stopReading() {
-    speechSynthesisInstance.cancel();
-}
+// Inicializa o texto
+updateText();
 
 // Event listeners
 nextLineButton.addEventListener("click", showNextLine);
@@ -136,7 +97,3 @@ prevLineButton.addEventListener("click", showPrevLine);
 document.getElementById("toggleFocusMode").addEventListener("click", toggleFocusMode);
 increaseTextSizeBtn.addEventListener("click", increaseTextSize);
 decreaseTextSizeBtn.addEventListener("click", decreaseTextSize);
-toggleAudioBtn.addEventListener("click", toggleAudio);
-
-// Inicializa o texto
-updateText();
