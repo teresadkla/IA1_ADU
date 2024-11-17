@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Focus Mode Interface</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <div class="controls">
-            <button id="increaseTextSize">Text size +</button>
-            <button id="decreaseTextSize">Text size -</button>
-            <button id="toggleAudio">Audio text</button>
+            <div class="textsize">
+                <label>Text Size</label>
+                <button id="increaseTextSize"><img src="images/mais.svg" alt="Increase Text Size"></button>
+                <button id="decreaseTextSize"><img src="images/menos.svg" alt="Decrease Text Size"></button>
+            </div>
+            <div class="texttospeach">
+                <label>Audio text</label>
+                <button id="toggleAudio"><img src="images/sound_off.svg" alt="Audio off"></button>
+            </div>
             <button id="toggleFocusMode">Focus mode <span id="focusStatus">Off</span></button>
         </div>
 
@@ -29,10 +37,11 @@
                     <button id="prevLine" class="nav-arrow"><img src="images/up.svg" alt="go up arrow"></button>
                     <button id="nextLine" class="nav-arrow"><img src="images/down.svg" alt="go down arrow"></button>
                 </div>
-            </div>            
-            
+            </div>
+
         </div>
     </div>
     <script src="interaction.js"></script>
 </body>
+
 </html>

@@ -1,4 +1,3 @@
-
 const textContentEl = document.getElementById("textContent");
 const focusStatusEl = document.getElementById("focusStatus");
 const progressBarEl = document.getElementById("progressBar");
@@ -7,9 +6,8 @@ const nextLineButton = document.getElementById("nextLine");
 const prevLineButton = document.getElementById("prevLine");
 const increaseTextSizeBtn = document.getElementById("increaseTextSize");
 const decreaseTextSizeBtn = document.getElementById("decreaseTextSize");
+const toggleAudioBtn = document.getElementById("toggleAudio");
 
-
-// Conteúdo do texto dividido em linhas
 const textLines = [
     "Trevor is a high school student diagnosed with autism.",
     "He faces challenges in social and communication skills.",
@@ -22,61 +20,63 @@ const textLines = [
 let focusMode = false;
 let currentLine = 0;
 let textSize = 18;
+let audioEnabled = false;
+let speechSynthesisInstance = window.speechSynthesis;
 
-// Atualiza o texto com base no modo de foco
+// Função para atualizar o texto
 function updateText() {
     if (focusMode) {
-        // Mostra apenas a linha atual no modo de foco
         textContentEl.innerText = textLines[currentLine];
-        updateProgressBar(); // Atualiza a barra de progresso
+        updateProgressBar();
     } else {
-        // Mostra todo o texto quando o modo de foco está desligado
         textContentEl.innerText = textLines.join(" ");
     }
 }
 
-// Atualiza a barra de progresso com base na linha atual
+// Função para atualizar a barra de progresso
 function updateProgressBar() {
     const progressPercentage = ((currentLine + 1) / textLines.length) * 100;
     progressBarEl.style.width = progressPercentage + "%";
 }
 
-// Alterna o modo de foco
+// Função para alternar o modo de foco
 function toggleFocusMode() {
     focusMode = !focusMode;
     focusStatusEl.innerText = focusMode ? "On" : "Off";
-    currentLine = 0; // Reinicia a linha atual
+    currentLine = 0;
 
-    // Mostra ou esconde a barra de progresso e os botões com base no modo de foco
     if (focusMode) {
-        progressContainerEl.style.display = "block"; // Mostra a barra de progresso
-        nextLineButton.style.display = "inline-block"; // Mostra o botão "Próxima"
-        prevLineButton.style.display = "inline-block"; // Mostra o botão "Anterior"
+        progressContainerEl.style.display = "flex";
+        nextLineButton.style.display = "inline-block";
+        prevLineButton.style.display = "inline-block";
     } else {
-        progressContainerEl.style.display = "none"; // Esconde a barra de progresso
-        nextLineButton.style.display = "none"; // Esconde o botão "Próxima"
-        prevLineButton.style.display = "none"; // Esconde o botão "Anterior"
-        progressBarEl.style.width = "0"; // Reseta a barra de progresso
+        progressContainerEl.style.display = "none";
+        nextLineButton.style.display = "none";
+        prevLineButton.style.display = "none";
+        progressBarEl.style.width = "0";
     }
 
-    updateText(); // Atualiza o texto com base no modo
+    updateText();
 }
 
-// Mostra a próxima linha no modo de foco
+// Funções de navegação
 function showNextLine() {
     if (focusMode && currentLine < textLines.length - 1) {
         currentLine++;
         updateText();
+        if (audioEnabled) readText(); // Lê automaticamente a próxima linha se o áudio estiver ativado
     }
 }
 
-// Mostra a linha anterior no modo de foco
 function showPrevLine() {
     if (focusMode && currentLine > 0) {
         currentLine--;
         updateText();
+        if (audioEnabled) readText(); // Lê automaticamente a linha anterior se o áudio estiver ativado
     }
 }
+
+// Funções para alterar o tamanho do texto
 function increaseTextSize() {
     textSize += 2;
     textContentEl.style.fontSize = textSize + "px";
@@ -88,12 +88,55 @@ function decreaseTextSize() {
         textContentEl.style.fontSize = textSize + "px";
     }
 }
-// Adiciona event listeners aos botões de navegação
+
+// Função para alternar o áudio
+function toggleAudio() {
+    audioEnabled = !audioEnabled;
+
+    if (audioEnabled) {
+        toggleAudioBtn.querySelector("img").src = "images/sound_on.svg";
+        toggleAudioBtn.querySelector("img").alt = "Audio on";
+        readText();
+    } else {
+        toggleAudioBtn.querySelector("img").src = "images/sound_off.svg";
+        toggleAudioBtn.querySelector("img").alt = "Audio off";
+        stopReading();
+    }
+}
+
+// Função para ler o texto
+function readText() {
+    speechSynthesisInstance.cancel(); // Cancela qualquer leitura em andamento
+
+    const textToRead = focusMode
+        ? textLines[currentLine] // Apenas a linha atual no modo de foco
+        : textLines.join(" "); // Todo o texto fora do modo de foco
+
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = "en-US"; // Define o idioma da fala
+    utterance.rate = 1; // Velocidade da fala
+    speechSynthesisInstance.speak(utterance);
+
+    // Parar o áudio automaticamente ao terminar a leitura
+    utterance.onend = () => {
+        audioEnabled = false;
+        toggleAudioBtn.querySelector("img").src = "images/sound_off.svg";
+        toggleAudioBtn.querySelector("img").alt = "Audio off";
+    };
+}
+
+// Função para parar a leitura
+function stopReading() {
+    speechSynthesisInstance.cancel();
+}
+
+// Event listeners
 nextLineButton.addEventListener("click", showNextLine);
 prevLineButton.addEventListener("click", showPrevLine);
 document.getElementById("toggleFocusMode").addEventListener("click", toggleFocusMode);
 increaseTextSizeBtn.addEventListener("click", increaseTextSize);
 decreaseTextSizeBtn.addEventListener("click", decreaseTextSize);
+toggleAudioBtn.addEventListener("click", toggleAudio);
 
 // Inicializa o texto
 updateText();
