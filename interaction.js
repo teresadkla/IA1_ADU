@@ -1,4 +1,4 @@
-// Variáveis principais
+
 const textContentEl = document.getElementById("textContent");
 const focusStatusEl = document.getElementById("focusStatus");
 const progressBarEl = document.getElementById("progressBar");
@@ -38,7 +38,7 @@ function updateProgressBar() {
     progressBarEl.style.width = progressPercentage + "%";
 }
 
-// Função para alternar o modo de foco
+// Função para alterar o modo de foco
 function toggleFocusMode() {
     focusMode = !focusMode;
     focusStatusEl.innerText = focusMode ? "On" : "Off";
@@ -58,12 +58,13 @@ function toggleFocusMode() {
     updateText();
 }
 
-// Funções de navegação
+
+// Funções de navegação (setas)
 function showNextLine() {
     if (focusMode && currentLine < textLines.length - 1) {
         currentLine++;
         updateText();
-        if (typeof readText === "function") readText(); // Chama o TTS, se ativo
+        if (typeof readText === "function") readText(); 
     }
 }
 
@@ -71,11 +72,11 @@ function showPrevLine() {
     if (focusMode && currentLine > 0) {
         currentLine--;
         updateText();
-        if (typeof readText === "function") readText(); // Chama o TTS, se ativo
+        if (typeof readText === "function") readText();
     }
 }
 
-// Funções para alterar o tamanho do texto
+// Alterar o tamanho do texto
 function increaseTextSize() {
     textSize += 2;
     textContentEl.style.fontSize = textSize + "px";
@@ -87,6 +88,7 @@ function decreaseTextSize() {
         textContentEl.style.fontSize = textSize + "px";
     }
 }
+
 
 // Inicializa o texto
 updateText();
