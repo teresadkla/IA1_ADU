@@ -9,6 +9,7 @@ const increaseTextSizeBtn = document.getElementById("increaseTextSize");
 const decreaseTextSizeBtn = document.getElementById("decreaseTextSize");
 const toggleAudioBtn = document.getElementById("toggleAudio");
 
+
 // Seleciona todos os elementos de texto (h3 e p)
 const textElements = Array.from(textContentEl.querySelectorAll("h3, p"));
 
@@ -17,6 +18,7 @@ let focusMode = false;
 let currentElementIndex = 0;
 let textSize = 18;
 let audioEnabled = false;
+let speechRate = 0.6; // Velocidade inicial
 let speechSynthesisInstance = window.speechSynthesis;
 
 // Função para atualizar o estado do texto
@@ -109,11 +111,9 @@ function readText() {
     speechSynthesisInstance.cancel(); // Cancela qualquer leitura em andamento
 
     if (focusMode) {
-        // No modo Focus, lê apenas o elemento atual
         const textToRead = textElements[currentElementIndex];
         highlightAndSpeak(textToRead);
     } else {
-        // No modo Focus Off, lê todos os elementos visíveis em ordem
         textElements.forEach((el) => highlightAndSpeak(el));
     }
 }
@@ -124,36 +124,32 @@ function highlightAndSpeak(element) {
     const words = text.split(" ");
     element.innerHTML = ""; // Limpa o conteúdo para recriar o texto com spans
 
-    // Envolvendo cada palavra em um span
-    words.forEach((word, index) => {
+    words.forEach((word) => {
         const span = document.createElement("span");
-        span.innerText = word + " "; // Adiciona espaço após cada palavra
+        span.innerText = word + " ";
         element.appendChild(span);
     });
 
-    // Obtendo todas as palavras como spans
     const wordSpans = Array.from(element.querySelectorAll("span"));
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US"; // Define o idioma da fala
-    utterance.rate = 1; // Velocidade da fala
+    utterance.lang = "en-US";
+    utterance.rate = speechRate;
 
     let currentWordIndex = 0;
 
-    // Evento para destacar a palavra atual
     utterance.onboundary = (event) => {
         if (event.name === "word") {
             if (currentWordIndex > 0) {
-                wordSpans[currentWordIndex - 1].classList.remove("highlight"); // Remove destaque anterior
+                wordSpans[currentWordIndex - 1].classList.remove("highlight");
             }
             if (currentWordIndex < wordSpans.length) {
-                wordSpans[currentWordIndex].classList.add("highlight"); // Adiciona destaque
+                wordSpans[currentWordIndex].classList.add("highlight");
                 currentWordIndex++;
             }
         }
     };
 
-    // Remove o destaque ao final
     utterance.onend = () => {
         wordSpans.forEach((span) => span.classList.remove("highlight"));
     };
@@ -166,6 +162,8 @@ function stopReading() {
     speechSynthesisInstance.cancel();
 }
 
+
+
 // Event listeners
 nextLineButton.addEventListener("click", showNextLine);
 prevLineButton.addEventListener("click", showPrevLine);
@@ -173,6 +171,8 @@ document.getElementById("toggleFocusMode").addEventListener("click", toggleFocus
 increaseTextSizeBtn.addEventListener("click", increaseTextSize);
 decreaseTextSizeBtn.addEventListener("click", decreaseTextSize);
 toggleAudioBtn.addEventListener("click", toggleAudio);
+
+
 
 // Inicializa o texto
 updateText();
