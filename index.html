@@ -4,35 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acess Buddy - Persona Card</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" rel="stylesheet">
+    <title>Access Buddy - Persona Card</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  
+
     <div class="container">
         <div class="controls">
             <div class="textsize">
                 <label>Text Size</label>
-                <button id="increaseTextSize"aria-label="Aumentar tamanho do texto" tabindex="0"><img src="images/mais.svg" alt="Increase Text Size"></button>
-                <button id="decreaseTextSize"aria-label="Diminuir tamanho do texto" tabindex="0"><img src="images/menos.svg" alt="Decrease Text Size"></button>
+                <button id="increaseTextSize" aria-label="Aumentar tamanho do texto" tabindex="0"><img
+                        src="images/mais.svg" alt="Increase Text Size"></button>
+                <button id="decreaseTextSize" aria-label="Diminuir tamanho do texto" tabindex="0"><img
+                        src="images/menos.svg" alt="Decrease Text Size"></button>
             </div>
             <div class="texttospeach">
                 <label>Audio text</label>
-                <button id="toggleAudio" aria-pressed="false" aria-label="Ativar áudio" tabindex="0"><img src="images/sound_off.svg" alt="Audio off"></button>
+                <button id="toggleAudio" aria-pressed="false" aria-label="Ativar áudio" tabindex="0"><img
+                        src="images/sound_off.svg" alt="Audio off"></button>
             </div>
-            
-            <button id="toggleFocusMode" aria-pressed="false" aria-label="Ativar modo de foco" >Focus mode <span id="focusStatus">Off</span></button>
+
+            <button id="toggleFocusMode" aria-pressed="false" aria-label="Ativar modo de foco">Focus mode <span
+                    id="focusStatus">Off</span></button>
         </div>
 
 
 
-
-        <div class="content">
+       
             <div class="image">
                 <img id="trevorpic" src="images/illustrationv2.png" alt="Trevor usando um tablet">
             </div>
+
             <div class="text-section">
                 <h2>High school student with autism</h2>
                 <div id="progressContainer" class="progress-container">
@@ -67,12 +73,14 @@
 
 
                 <div class="navigation">
-                    <button id="prevLine" aria-label="Ir para a parte anterior" tabindex="0" class="nav-arrow"><img src="images/up.svg" alt="go up arrow"></button>
-                    <button id="nextLine" aria-label="Ir para a parte seguinte" tabindex="0" class="nav-arrow"><img src="images/down.svg" alt="go down arrow"></button>
+                    <button id="prevLine" aria-label="Ir para a parte anterior" tabindex="0" class="nav-arrow"><img
+                            src="images/up.svg" alt="go up arrow"></button>
+                    <button id="nextLine" aria-label="Ir para a parte seguinte" tabindex="0" class="nav-arrow"><img
+                            src="images/down.svg" alt="go down arrow"></button>
                 </div>
             </div>
 
-        </div>
+        
     </div>
     <script src="interaction.js"></script>
     <script src="keyboardacess.js"></script>
