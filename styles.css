@@ -137,4 +137,8 @@ body {
     font-size: 14px;
 } */
 
+button:focus {
+    outline: 2px solid #007BFF; /* Azul para indicar foco */
+    outline-offset: 2px;
+}
 
