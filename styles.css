@@ -3,8 +3,8 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8dc;
+    font-family: 'Poppins', sans-serif;
+    background-color: #EEECFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,25 +13,39 @@ body {
 
 }
 
+h2 {
+    font-size: 2rem;
+}
+
 .container {
-   /* max-width: 100vw;*/
-   width: 100vw;
+    /* max-width: 100vw;*/
+    width: 100vw;
     padding: 20px;
-}
-
-.controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.content {
-    display: flex;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: repeat(24, 1fr);
     gap: 20px;
 }
 
+.controls {
+    grid-column-start: 2;
+    grid-column-end: 9;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+
+}
+
+
 .image {
-    width: 40%;
+    /* width: 40%; */
+    grid-column-start: 2;
+    grid-column-end: 10;
+    /* A imagem ocupa as primeiras 4 colunas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .image img {
@@ -41,12 +55,17 @@ body {
 
 
 .text-section {
-    flex: 1;
+    grid-column-start: 11;
+    grid-column-end: 25;
+    /* O texto ocupa as colunas de 5 a 12 */
+    display: flex;
+    flex-direction: column;
+
 }
 
 .text-content {
-    background-color: #657b7b;
-    color: white;
+    background-color: #D4CFF4;
+    color: #000000;
     padding: 20px;
     border-radius: 10px;
     min-height: fit-content;
@@ -75,13 +94,14 @@ body {
     background-color: #ddd;
     border-radius: 5px;
     margin-bottom: 10px;
-    display: none; /* Inicialmente escondida */
+    display: none;
+    /* Inicialmente escondida */
 }
 
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #4caf50; 
+    background-color: #4caf50;
     border-radius: 5px;
     transition: width 0.3s ease;
 }
@@ -89,38 +109,35 @@ body {
 #nextLine,
 #prevLine {
     display: none;
-    
+
 }
 
 /*Botões de costumização*/
-.textsize, .texttospeach {
-    background-color: lightblue;
+.textsize,
+.texttospeach {
+    background-color: #C0DAF1;
     padding: 10px;
     border-radius: 5px;
 }
 
-#increaseTextSize, #decreaseTextSize {
-    background-color: deeppink;
+#increaseTextSize,
+#decreaseTextSize,
+#toggleAudio {
+    background-color: rgb(255, 255, 255);
     width: 30px;
     height: 30px;
     border: none;
     border-radius: 100%;
     cursor: pointer;
 }
-#toggleAudio{
-    background-color: rgb(64, 152, 47);
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 100%;
-    cursor: pointer;
-}
+
 
 .highlight {
     background-color: yellow;
     color: black;
 
 }
+
 /* 
 .audio-player {
     display: flex;
@@ -138,7 +155,7 @@ body {
 } */
 
 button:focus {
-    outline: 2px solid #007BFF; /* Azul para indicar foco */
+    outline: 2px solid #007BFF;
+    /* Azul para indicar foco */
     outline-offset: 2px;
 }
-
