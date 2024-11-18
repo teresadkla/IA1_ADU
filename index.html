@@ -14,7 +14,12 @@
 <body>
 
     <div class="container">
+
+
         <div class="controls">
+            <!-- <a href="index.html">
+                <div>Access Buddy - persona card</div>
+              </a> -->
             <div class="textsize">
                 <label>Text Size</label>
                 <button id="increaseTextSize" aria-label="Aumentar tamanho do texto" tabindex="0"><img
@@ -28,13 +33,28 @@
                         src="images/sound_off.svg" alt="Audio off"></button>
             </div>
 
+            <!-- Botão de ligar/desligar dicionário -->
+            <div class="dictionary-toggle">
+                <button id="toggleDictionary" aria-pressed="false" aria-label="Ativar dicionário">Dictionary:
+                    Off</button>
+            </div>
+
+
             <button id="toggleFocusMode" aria-pressed="false" aria-label="Ativar modo de foco">Focus mode <span
                     id="focusStatus">Off</span></button>
         </div>
 
 
+        <div id="definition-popup" class="popup hidden">
+            <div class="popup-content">
+                <span id="popup-word"></span>
+                <p id="popup-definition"></p>
+                <button id="popup-close">Close</button>
+            </div>
+        </div>
 
-       
+
+        <div class="content">
             <div class="image">
                 <img id="trevorpic" src="images/illustrationv2.png" alt="Trevor usando um tablet">
             </div>
@@ -80,9 +100,12 @@
                 </div>
             </div>
 
-        
+
+
+        </div>
     </div>
     <script src="interaction.js"></script>
+    <script src="dicionary.js"></script>
     <script src="keyboardacess.js"></script>
 </body>
 
