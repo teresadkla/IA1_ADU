@@ -3,14 +3,17 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8dc;
+    font-family: 'Poppins', sans-serif;
+    background-color: #EEECFF;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
 
+}
+h2 {
+    font-size: 2rem;
 }
 
 .container {
@@ -45,8 +48,8 @@ body {
 }
 
 .text-content {
-    background-color: #657b7b;
-    color: white;
+    background-color: #D4CFF4;
+    color: #000000;
     padding: 20px;
     border-radius: 10px;
     min-height: fit-content;
@@ -94,27 +97,20 @@ body {
 
 /*Botões de costumização*/
 .textsize, .texttospeach {
-    background-color: lightblue;
+    background-color: #C0DAF1;
     padding: 10px;
     border-radius: 5px;
 }
 
-#increaseTextSize, #decreaseTextSize {
-    background-color: deeppink;
+#increaseTextSize, #decreaseTextSize, #toggleAudio{
+    background-color: rgb(255, 255, 255);
     width: 30px;
     height: 30px;
     border: none;
     border-radius: 100%;
     cursor: pointer;
 }
-#toggleAudio{
-    background-color: rgb(64, 152, 47);
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 100%;
-    cursor: pointer;
-}
+
 
 .highlight {
     background-color: yellow;
