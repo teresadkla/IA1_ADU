@@ -12,103 +12,112 @@
 </head>
 
 <body>
+    <main>
+        <div class="container">
 
-    <div class="container">
 
-
-        <div class="controls">
-            <!-- <a href="index.html">
+            <div class="controls">
+                <!-- <a href="index.html">
                 <div>Access Buddy - persona card</div>
               </a> -->
-            <div class="textsize">
-                <label>Text Size</label>
-                <button id="increaseTextSize" aria-label="Aumentar tamanho do texto" tabindex="0"><img
-                        src="images/mais.svg" alt="Increase Text Size"></button>
-                <button id="decreaseTextSize" aria-label="Diminuir tamanho do texto" tabindex="0"><img
-                        src="images/menos.svg" alt="Decrease Text Size"></button>
-            </div>
-            <div class="texttospeach">
-                <label>Audio text</label>
-                <button id="toggleAudio" aria-pressed="false" aria-label="Ativar áudio" tabindex="0"><img
-                        src="images/sound_off.svg" alt="Audio off"></button>
-            </div>
+                <div class="textsize">
+                    <label>Text Size</label>
+                    <button id="increaseTextSize" aria-label="Aumentar tamanho do texto" tabindex="0"><img
+                            src="images/mais.svg" alt="Increase Text Size"></button>
+                    <button id="decreaseTextSize" aria-label="Diminuir tamanho do texto" tabindex="0"><img
+                            src="images/menos.svg" alt="Decrease Text Size"></button>
+                </div>
+                <div class="texttospeach">
+                    <label>Audio text</label>
+                    <button id="toggleAudio" aria-pressed="false" aria-label="Ativar áudio" tabindex="0"><img
+                            src="images/sound_off.svg" alt="Audio off"></button>
+                </div>
 
-            <!-- Botão de ligar/desligar dicionário -->
-            <button id="toggleDictionary" aria-pressed="false" aria-labelledby="toggleDictionaryText">
-                <span id="toggleDictionaryText">Dictionary Off</span>
-            </button>
-            
-            
-            <div class="switchbtn">
-                <label for="toggleFocusMode">Focus mode</label>
-                <input id="toggleFocusMode" class="switch switch--flat" type="checkbox" aria-label="Ativar modo de foco">
-                <label for="toggleFocusMode"></label>
-                <span id="focusStatus">Off</span>
-            </div>
-            
-            
-        </div>  
+                <!-- Botão de ligar/desligar dicionário -->
+                <button id="toggleDictionary" aria-pressed="false" aria-labelledby="toggleDictionaryText">
+                    <span id="toggleDictionaryText">Dictionary Off</span>
+                </button>
 
 
-        <div id="definition-popup" class="popup hidden">
-            <div class="popup-content">
-                <span id="popup-word"></span>
-                <p id="popup-definition"></p>
-                <button id="popup-close">Close</button>
+                <div class="switchbtn">
+                    <label for="toggleFocusMode">Focus mode</label>
+                    <input id="toggleFocusMode" class="switch switch--flat" type="checkbox"
+                        aria-label="Ativar modo de foco">
+                    <label for="toggleFocusMode"></label>
+                    <span id="focusStatus">Off</span>
+                </div>
+
+
+            </div>
+
+
+            <div id="definition-popup" class="popup hidden">
+                <div class="popup-content">
+                    <span id="popup-word"></span>
+                    <p id="popup-definition"></p>
+                    <button id="popup-close">Close</button>
+                </div>
+            </div>
+
+
+            <div class="content">
+                <div class="image">
+                    <img id="trevorpic" src="images/illustrationv2.png" alt="Trevor usando um tablet">
+                </div>
+
+                <div class="text-section">
+                    <h2>High school student with autism</h2>
+                    <div id="progressContainer" class="progress-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                    <div id="textContent" class="text-content">
+                        <h3> Who is Trevor? </h3>
+                        <p>Trevor is a bright 18-year-old who plays games and watches videos on his laptop. He lives at
+                            home
+                            with his parents. He attends a special school where the teachers and staff help with his
+                            social
+                            and communication challenges from his Autism Spectrum Disorder.</p>
+
+                        <h3> Does Trevor face any difficulties?</h3>
+                        <p> He has problems with visual information and recognizing things on the page, and his reading
+                            skills
+                            are not helped by his trouble concentrating on the page or screen long enough to read. His
+                            teachers
+                            showed him how to make the text bigger on the page and told him how to use a printable view
+                            to
+                            hide
+                            all the ads with moving images that distract him, because he reads every word on the page
+                            very
+                            carefully and literally. He can be easily confused by colloquialisms and metaphors. He can
+                            also
+                            be
+                            overwhelmed by sites that offer too many choices. </p>
+
+                        <h3> What does Trevor like to do? </h3>
+                        <p> He likes using the school’s forum to talk to his friends. It’s easier to just read what they
+                            want to
+                            say than to listen and try to figure out their facial expressions. He shares a laptop with
+                            the
+                            family but has first dibs on it because his parents want him to get his schoolwork done. He
+                            uses
+                            it
+                            for homework, but he really likes games with repetitive actions.</p>
+                    </div>
+
+
+                    <div class="navigation">
+                        <button id="prevLine" aria-label="Ir para a parte anterior" tabindex="0" class="nav-arrow"><img
+                                src="images/up.svg" alt="go up arrow"></button>
+                        <button id="nextLine" aria-label="Ir para a parte seguinte" tabindex="0" class="nav-arrow"><img
+                                src="images/down.svg" alt="go down arrow"></button>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
-
-
-        <div class="content">
-            <div class="image">
-                <img id="trevorpic" src="images/illustrationv2.png" alt="Trevor usando um tablet">
-            </div>
-
-            <div class="text-section">
-                <h2>High school student with autism</h2>
-                <div id="progressContainer" class="progress-container">
-                    <div id="progressBar" class="progress-bar"></div>
-                </div>
-                <div id="textContent" class="text-content">
-                    <h3> Who is Trevor? </h3>
-                    <p>Trevor is a bright 18-year-old who plays games and watches videos on his laptop. He lives at home
-                        with his parents. He attends a special school where the teachers and staff help with his social
-                        and communication challenges from his Autism Spectrum Disorder.</p>
-
-                    <h3> Does Trevor face any difficulties?</h3>
-                    <p> He has problems with visual information and recognizing things on the page, and his reading
-                        skills
-                        are not helped by his trouble concentrating on the page or screen long enough to read. His
-                        teachers
-                        showed him how to make the text bigger on the page and told him how to use a printable view to
-                        hide
-                        all the ads with moving images that distract him, because he reads every word on the page very
-                        carefully and literally. He can be easily confused by colloquialisms and metaphors. He can also
-                        be
-                        overwhelmed by sites that offer too many choices. </p>
-
-                    <h3> What does Trevor like to do? </h3>
-                    <p> He likes using the school’s forum to talk to his friends. It’s easier to just read what they
-                        want to
-                        say than to listen and try to figure out their facial expressions. He shares a laptop with the
-                        family but has first dibs on it because his parents want him to get his schoolwork done. He uses
-                        it
-                        for homework, but he really likes games with repetitive actions.</p>
-                </div>
-
-
-                <div class="navigation">
-                    <button id="prevLine" aria-label="Ir para a parte anterior" tabindex="0" class="nav-arrow"><img
-                            src="images/up.svg" alt="go up arrow"></button>
-                    <button id="nextLine" aria-label="Ir para a parte seguinte" tabindex="0" class="nav-arrow"><img
-                            src="images/down.svg" alt="go down arrow"></button>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
+    </main>
     <script src="interaction.js"></script>
     <script src="dicionary.js"></script>
     <script src="keyboardacess.js"></script>
