@@ -9,7 +9,6 @@ const increaseTextSizeBtn = document.getElementById("increaseTextSize");
 const decreaseTextSizeBtn = document.getElementById("decreaseTextSize");
 const toggleAudioBtn = document.getElementById("toggleAudio");
 
-
 // Seleciona todos os elementos de texto (h3 e p)
 const textElements = Array.from(textContentEl.querySelectorAll("h3, p"));
 
@@ -27,6 +26,11 @@ function updateText() {
         textElements.forEach((el, index) => {
             el.style.display = index === currentElementIndex ? "block" : "none";
         });
+
+        // Controle de visibilidade dos botões
+        prevLineButton.style.display = currentElementIndex > 0 ? "inline-block" : "none";
+        nextLineButton.style.display = currentElementIndex < textElements.length - 1 ? "inline-block" : "none";
+
         updateProgressBar();
     } else {
         textElements.forEach((el) => {
@@ -49,8 +53,8 @@ function toggleFocusMode() {
 
     if (focusMode) {
         progressContainerEl.style.display = "flex";
-        nextLineButton.style.display = "inline-block";
-        prevLineButton.style.display = "inline-block";
+        nextLineButton.style.display = "block";
+        prevLineButton.style.display = "none"; // PrevLine começa oculto
     } else {
         progressContainerEl.style.display = "none";
         nextLineButton.style.display = "none";
@@ -66,7 +70,7 @@ function showNextLine() {
     if (focusMode && currentElementIndex < textElements.length - 1) {
         currentElementIndex++;
         updateText();
-        if (audioEnabled) readText(); // Lê automaticamente o próximo elemento se o áudio estiver ativado
+        if (audioEnabled) readText();
     }
 }
 
@@ -74,7 +78,7 @@ function showPrevLine() {
     if (focusMode && currentElementIndex > 0) {
         currentElementIndex--;
         updateText();
-        if (audioEnabled) readText(); // Lê automaticamente o elemento anterior se o áudio estiver ativado
+        if (audioEnabled) readText();
     }
 }
 
@@ -98,7 +102,7 @@ function toggleAudio() {
     if (audioEnabled) {
         toggleAudioBtn.querySelector("img").src = "images/sound_on.svg";
         toggleAudioBtn.querySelector("img").alt = "Audio on";
-        readText(); // Lê o texto completo no modo atual
+        readText();
     } else {
         toggleAudioBtn.querySelector("img").src = "images/sound_off.svg";
         toggleAudioBtn.querySelector("img").alt = "Audio off";
@@ -108,7 +112,7 @@ function toggleAudio() {
 
 // Função para ler o texto atual ou todos os textos no modo Focus Off
 function readText() {
-    speechSynthesisInstance.cancel(); // Cancela qualquer leitura em andamento
+    speechSynthesisInstance.cancel();
 
     if (focusMode) {
         const textToRead = textElements[currentElementIndex];
@@ -122,7 +126,7 @@ function readText() {
 function highlightAndSpeak(element) {
     const text = element.innerText;
     const words = text.split(" ");
-    element.innerHTML = ""; // Limpa o conteúdo para recriar o texto com spans
+    element.innerHTML = "";
 
     words.forEach((word) => {
         const span = document.createElement("span");
@@ -162,8 +166,6 @@ function stopReading() {
     speechSynthesisInstance.cancel();
 }
 
-
-
 // Event listeners
 nextLineButton.addEventListener("click", showNextLine);
 prevLineButton.addEventListener("click", showPrevLine);
@@ -171,8 +173,6 @@ document.getElementById("toggleFocusMode").addEventListener("click", toggleFocus
 increaseTextSizeBtn.addEventListener("click", increaseTextSize);
 decreaseTextSizeBtn.addEventListener("click", decreaseTextSize);
 toggleAudioBtn.addEventListener("click", toggleAudio);
-
-
 
 // Inicializa o texto
 updateText();

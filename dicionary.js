@@ -1,64 +1,75 @@
-document.getElementById('searchWord').addEventListener('click', function () {
-    const word = document.getElementById('wordInput').value;
-    
-    if (word) {
-        detectLanguage(word);
-    } else {
-        alert('Por favor, digite uma palavra');
-    }
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const textSection = document.querySelector(".text-section");
+    const popup = document.getElementById("definition-popup");
+    const popupWord = document.getElementById("popup-word");
+    const popupDefinition = document.getElementById("popup-definition");
+    const popupClose = document.getElementById("popup-close");
+    const toggleDictionaryButton = document.getElementById("toggleDictionary");
 
-function detectLanguage(word) {
-    const apiKey = 'YOUR_GOOGLE_API_KEY';  // Insira sua chave da API do Google Cloud Translation
-    const apiUrl = `https://translation.googleapis.com/language/translate/v2/detect?key=${apiKey}`;
-    
-    fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            q: word
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const detectedLanguage = data.data.detections[0][0].language;
-        console.log(`Idioma detectado: ${detectedLanguage}`);
-        fetchWordDefinition(word, detectedLanguage);
-    })
-    .catch(error => {
-        document.getElementById('wordResult').innerText = 'Erro ao detectar idioma';
-        console.error(error);
+    // Substitua pela sua chave de API Merriam-Webster
+    const API_KEY = "3ef88425-0a6a-4e75-9abb-5776cdf456e6";
+
+    // Variável de controle para ativar/desativar o dicionário
+    let isDictionaryActive = false;
+
+    // Lógica para alternar o estado do dicionário
+    toggleDictionaryButton.addEventListener("click", () => {
+        isDictionaryActive = !isDictionaryActive;
+        toggleDictionaryButton.setAttribute("aria-pressed", isDictionaryActive);
+        toggleDictionaryButton.textContent = isDictionaryActive ? "Dictionary: On" : "Dictionary: Off";
     });
-}
 
-function fetchWordDefinition(word, language) {
-    const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/${language}/${word}`;
+    textSection.addEventListener("click", async (event) => {
+        const target = event.target;
 
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Palavra não encontrada');
+        // Verifica se o dicionário está ativo antes de prosseguir
+        if (!isDictionaryActive) return;
+
+        if (target.tagName === "P" || target.tagName === "SPAN" || target.tagName === "H3") {
+            const word = window.getSelection().toString().trim();
+
+            if (word) {
+                const url = `https://dictionaryapi.com/api/v3/references/sd4/json/${word}?key=${API_KEY}`;
+                try {
+                    const response = await fetch(url);
+                    const result = await response.json();
+
+                    if (Array.isArray(result) && result[0]?.shortdef?.length) {
+                        const definition = result[0].shortdef[0];
+
+                        popupWord.textContent = word;
+                        popupDefinition.innerHTML = `
+                            <strong>Definition:</strong> ${definition}
+                        `;
+                        popup.classList.remove("hidden");
+                    } else if (Array.isArray(result) && result.length) {
+                        // Sugestões de palavras, caso não tenha uma definição exata
+                        popupWord.textContent = word;
+                        popupDefinition.textContent = `No exact definition found. Did you mean: ${result.join(", ")}?`;
+                        popup.classList.remove("hidden");
+                    } else {
+                        popupWord.textContent = word;
+                        popupDefinition.textContent = "Definition not found.";
+                        popup.classList.remove("hidden");
+                    }
+                } catch (error) {
+                    console.error("Error fetching definition:", error);
+                    popupWord.textContent = word;
+                    popupDefinition.textContent = "Error fetching definition.";
+                    popup.classList.remove("hidden");
+                }
             }
-            return response.json();
-        })
-        .then(data => {
-            displayWordDefinition(data);
-        })
-        .catch(error => {
-            document.getElementById('wordResult').innerText = error.message;
-        });
-}
+        }
+    });
 
-function displayWordDefinition(data) {
-    const resultContainer = document.getElementById('wordResult');
-    resultContainer.innerHTML = '';
-    
-    if (data && data[0] && data[0].meanings) {
-        const meanings = data[0].meanings.map(meaning => `<p><strong>Tipo:</strong> ${meaning.partOfSpeech} <br> <strong>Definição:</strong> ${meaning.definitions[0].definition}</p>`).join('');
-        resultContainer.innerHTML = meanings;
-    } else {
-        resultContainer.innerText = 'Definição não encontrada.';
-    }
-}
+    popupClose.addEventListener("click", () => {
+        popup.classList.add("hidden");
+    });
+
+    // Fecha o popup se o usuário clicar fora dele
+    document.addEventListener("click", (event) => {
+        if (!popup.contains(event.target) && !event.target.closest(".text-section")) {
+            popup.classList.add("hidden");
+        }
+    });
+});
