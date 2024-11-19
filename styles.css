@@ -39,10 +39,7 @@ h2 {
 a{
     text-decoration: none;
 }
-.controls > :first-child {
-    /* O primeiro filho fica à esquerda */
-    margin-right: auto;
-}
+
 
 .content {
     display: grid;
@@ -86,7 +83,7 @@ a{
 
 .navigation {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;;
     margin-top: 10px;
 }
 
@@ -125,11 +122,21 @@ a{
 }
 
 /*Botões de costumização*/
-.textsize, .texttospeach {
+.textsize, .texttospeach,#toggleFocusMode{
     background-color: #C0DAF1;
     padding: 10px;
     border-radius: 5px;
+    border-style: none;
 }
+#toggleDictionary{
+    background-color: #F8DAFF;
+    padding: 16px;
+    border-radius: 5px;
+    border-style: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+
 
 #increaseTextSize, #decreaseTextSize, #toggleAudio{
     background-color: rgb(255, 255, 255);
@@ -227,12 +234,6 @@ button:focus {
 }
 
 
-
-
-
-
-
-
 .popup {
     position: fixed;
     top: 50%;
@@ -265,3 +266,7 @@ button:focus {
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+
+
