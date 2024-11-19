@@ -8,10 +8,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     margin: 0;
 
 }
+
 h2 {
     margin-top: 0;
     font-size: 2rem;
@@ -23,7 +23,7 @@ h2 {
     grid-gap: 10px;
     flex-direction: column;
     align-items: flex-end;
-    
+
 }
 
 .controls {
@@ -36,7 +36,7 @@ h2 {
     align-items: center;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -90,7 +90,8 @@ a{
 
 .navigation {
     display: flex;
-    justify-content: space-around;;
+    justify-content: space-around;
+    ;
     margin-top: 10px;
 }
 
@@ -111,13 +112,14 @@ a{
     background-color: #ddd;
     border-radius: 5px;
     margin-bottom: 10px;
-    display: none; /* Inicialmente escondida */
+    display: none;
+    /* Inicialmente escondida */
 }
 
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #49BF7C; 
+    background-color: #49BF7C;
     border-radius: 5px;
     transition: width 0.3s ease;
 }
@@ -125,17 +127,20 @@ a{
 #nextLine,
 #prevLine {
     display: none;
-    
+
 }
 
 /*Botões de costumização*/
-.textsize, .texttospeach,#toggleFocusMode{
+.textsize,
+.texttospeach,
+#toggleFocusMode {
     background-color: #C0DAF1;
     padding: 10px;
     border-radius: 5px;
     border-style: none;
 }
-#toggleDictionary{
+
+#toggleDictionary {
     background-color: #E1C2E8;
     padding: 16px;
     border-radius: 5px;
@@ -145,7 +150,9 @@ a{
 
 
 
-#increaseTextSize, #decreaseTextSize, #toggleAudio{
+#increaseTextSize,
+#decreaseTextSize,
+#toggleAudio {
     background-color: rgb(255, 255, 255);
     width: 30px;
     height: 30px;
@@ -163,7 +170,8 @@ a{
 
 
 button:focus {
-    outline: 2px solid #007BFF; /* Azul para indicar foco */
+    outline: 2px solid #007BFF;
+    /* Azul para indicar foco */
     outline-offset: 2px;
 }
 
@@ -171,20 +179,20 @@ button:focus {
 /* RESPONSIVIDADE DESKTOP*/
 @media screen and (min-width: 980px) {
 
-    
+
     .controls {
         /* margin-bottom: 20px;
         grid-column: 1 / span 5; */
-    } 
-    
-    
+    }
+
+
     .image {
         position: relative;
         top: -35%;
         grid-column: 1 / span 4;
         grid-row: 2 / span 4;
     }
-    
+
     .text-section {
         position: relative;
         top: -35%;
@@ -194,40 +202,54 @@ button:focus {
     }
 
 }
+
 /* INTERMÉDIO/ TABLETS*/
-@media screen and (min-width: 600px) and (max-width: 980px) {
-}
+@media screen and (min-width: 600px) and (max-width: 980px) {}
+
 /*MOBILE TELEMOVEL*/
 @media screen and (max-width: 600px) {
+.container{
+    align-items: center;
+}
+    .content {
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(12, 1fr);
+        /* display: flex; */
+        gap: 2%;
+        margin-top: 5%;
+    }
+
     .container {
         grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: repeat(12, 1fr);    
+        grid-template-columns: repeat(12, 1fr);
     }
-    
+
 
     .controls {
+       
         display: flex;
         gap: 10px;
         margin-bottom: 20px;
         position: fixed;
         height: fit-content;
         z-index: 2;
+        flex-direction: column;
         align-items: center;
     }
-    
+
     .image {
-        position: relative;
-        top: -35%;
-        grid-column: 1 / span 4;
-        grid-row: 2 / span 4;
+       height: fit-content;
+        grid-column: 1 / span 12;
+        grid-row: 3 / span 4;
+        margin-top: -25%;
     }
-    
+
     .text-section {
-        position: relative;
-        top: -35%;
+        margin-top: 50%;
         height: fit-content;
-        grid-column: 6 / span 6;
-        grid-row: 2 / span 6;
+        grid-column: 1 / span 12;
+        grid-row: 4 / span 6;
     }
 }
 
@@ -280,14 +302,15 @@ button:focus {
 /* Deixa o input acessível para teclado e leitores de tela */
 .switch {
     position: absolute;
-    opacity: 0; /* Mantém navegável */
+    opacity: 0;
+    /* Mantém navegável */
     width: 0;
     height: 0;
     z-index: -1;
 }
 
 /* Estilo do botão */
-.switch + label {
+.switch+label {
     display: block;
     position: relative;
     cursor: pointer;
@@ -301,14 +324,14 @@ button:focus {
     transition: background 0.4s;
 }
 
-.switch + label:before,
-.switch + label:after {
+.switch+label:before,
+.switch+label:after {
     display: block;
     position: absolute;
     content: "";
 }
 
-.switch + label:before {
+.switch+label:before {
     top: 2px;
     left: 2px;
     bottom: 2px;
@@ -318,7 +341,7 @@ button:focus {
     transition: background 0.4s;
 }
 
-.switch + label:after {
+.switch+label:after {
     top: 4px;
     left: 4px;
     bottom: 4px;
@@ -329,11 +352,11 @@ button:focus {
 }
 
 /* Quando o botão está ativado */
-.switch:checked + label {
+.switch:checked+label {
     background-color: #49BF7C;
 }
 
-.switch:checked + label:after {
+.switch:checked+label:after {
     margin-left: 30px;
     background-color: #49BF7C;
 }
@@ -344,15 +367,14 @@ button:focus {
     color: #555;
 }
 
-.switch:checked ~ #focusStatus {
+.switch:checked~#focusStatus {
     color: #2e6c35;
     content: "On";
     display: hidden;
 }
 
 /* Estilo visual para o foco */
-.switch:focus + label {
+.switch:focus+label {
     outline: 2px solid #007BFF;
     outline-offset: 2px;
 }
-
