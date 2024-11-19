@@ -40,13 +40,20 @@ a{
     text-decoration: none;
 }
 
+/* Adiciona cursor pointer às palavras clicáveis */
+/* .text-section p,
+.text-section span,
+.text-section h3 {
+    cursor: pointer;
+} */
+
 
 .content {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(12, 1fr);
     /* display: flex; */
-    gap: 20px;
+    gap: 2%;
     margin-top: 5%;
 
 }
@@ -129,7 +136,7 @@ a{
     border-style: none;
 }
 #toggleDictionary{
-    background-color: #F8DAFF;
+    background-color: #E1C2E8;
     padding: 16px;
     border-radius: 5px;
     border-style: none;
@@ -153,21 +160,7 @@ a{
     color: black;
 
 }
-/* 
-.audio-player {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
 
-#audioProgress {
-    width: 200px;
-}
-
-#audioCurrentTime, #audioDuration {
-    font-size: 14px;
-} */
 
 button:focus {
     outline: 2px solid #007BFF; /* Azul para indicar foco */
@@ -211,11 +204,16 @@ button:focus {
         grid-template-columns: repeat(12, 1fr);    
     }
     
+
     .controls {
+        display: flex;
+        gap: 10px;
         margin-bottom: 20px;
-        grid-column: 1 / span 5;
+        position: fixed;
+        height: fit-content;
+        z-index: 2;
+        align-items: center;
     }
-    
     
     .image {
         position: relative;
