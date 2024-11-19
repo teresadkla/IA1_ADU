@@ -24,9 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleDictionaryButton.addEventListener("click", () => {
         isDictionaryActive = !isDictionaryActive;
         toggleDictionaryButton.setAttribute("aria-pressed", isDictionaryActive);
+        
+        // Atualiza o texto exibido no botão
         toggleDictionaryButton.textContent = isDictionaryActive ? "Dictionary: On" : "Dictionary: Off";
+        
+        // Atualiza o aria-label para refletir o estado atual
+        toggleDictionaryButton.setAttribute("aria-label", isDictionaryActive ? "Desativar dicionário" : "Ativar dicionário");
+        
         updateCursorState(); // Atualiza o cursor dinamicamente
     });
+    
 
     textSection.addEventListener("click", async (event) => {
         const target = event.target;
