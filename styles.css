@@ -110,7 +110,7 @@ a{
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #4caf50; 
+    background-color: #49BF7C; 
     border-radius: 5px;
     transition: width 0.3s ease;
 }
@@ -259,8 +259,8 @@ button:focus {
 
 #popup-close {
     margin-top: 10px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #C0DAF1;
+    color: #000000;
     border: none;
     padding: 10px;
     border-radius: 5px;
@@ -269,4 +269,92 @@ button:focus {
 
 
 
+
+.switchbtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #BDDEB2;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Deixa o input acessível para teclado e leitores de tela */
+.switch {
+    position: absolute;
+    opacity: 0; /* Mantém navegável */
+    width: 0;
+    height: 0;
+    z-index: -1;
+}
+
+/* Estilo do botão */
+.switch + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    padding: 2px;
+    width: 60px;
+    height: 30px;
+    background-color: #d4d3e3;
+    border-radius: 30px;
+    transition: background 0.4s;
+}
+
+.switch + label:before,
+.switch + label:after {
+    display: block;
+    position: absolute;
+    content: "";
+}
+
+.switch + label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: #fff;
+    border-radius: 30px;
+    transition: background 0.4s;
+}
+
+.switch + label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 22px;
+    background-color: #d4d3e3;
+    border-radius: 50%;
+    transition: margin 0.4s, background 0.4s;
+}
+
+/* Quando o botão está ativado */
+.switch:checked + label {
+    background-color: #49BF7C;
+}
+
+.switch:checked + label:after {
+    margin-left: 30px;
+    background-color: #49BF7C;
+}
+
+/* Estilo do texto "Off/On" */
+#focusStatus {
+    font-size: 14px;
+    color: #555;
+}
+
+.switch:checked ~ #focusStatus {
+    color: #2e6c35;
+    content: "On";
+    display: hidden;
+}
+
+/* Estilo visual para o foco */
+.switch:focus + label {
+    outline: 2px solid #007BFF;
+    outline-offset: 2px;
+}
 
