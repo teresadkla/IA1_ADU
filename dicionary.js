@@ -12,11 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Variável de controle para ativar/desativar o dicionário
     let isDictionaryActive = false;
 
+    // Atualiza o cursor dos elementos na seção de texto
+    function updateCursorState() {
+        const textElements = document.querySelectorAll(".text-section p, .text-section span, .text-section h3");
+        textElements.forEach((element) => {
+            element.style.cursor = isDictionaryActive ? "pointer" : "default";
+        });
+    }
+
     // Lógica para alternar o estado do dicionário
     toggleDictionaryButton.addEventListener("click", () => {
         isDictionaryActive = !isDictionaryActive;
         toggleDictionaryButton.setAttribute("aria-pressed", isDictionaryActive);
         toggleDictionaryButton.textContent = isDictionaryActive ? "Dictionary: On" : "Dictionary: Off";
+        updateCursorState(); // Atualiza o cursor dinamicamente
     });
 
     textSection.addEventListener("click", async (event) => {
@@ -72,4 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             popup.classList.add("hidden");
         }
     });
+
+    // Atualizar cursor ao carregar a página
+    updateCursorState();
 });
